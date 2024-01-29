@@ -8,7 +8,11 @@ const mno = new Response("This route currently only accepts POST requests", {
 
 Deno.serve({ port: 80, hostname: "0.0.0.0" }, async (_req) => {
     if (_req.method == "POST") {
-        console.log(await _req.formData())
+        let form = await _req.formData()
+        console.log(JSON.stringify({
+            "username": form.username,
+            "password": form.password
+        }))
         return res;
     } else return mno;
 });
